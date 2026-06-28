@@ -24,7 +24,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-primary/10 to-background flex items-center justify-center p-12">
           <div className="max-w-md space-y-6 text-center">
             <blockquote className="text-2xl font-medium tracking-tight">
-              "We are what we repeatedly do. Excellence, then, is not an act, but a habit."
+              &quot;We are what we repeatedly do. Excellence, then, is not an act, but a habit.&quot;
             </blockquote>
             <p className="text-muted-foreground">— Will Durant</p>
           </div>

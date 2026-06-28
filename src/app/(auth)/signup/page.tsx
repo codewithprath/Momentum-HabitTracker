@@ -3,18 +3,20 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { signup } from "../actions"
+import { signup } from "@/app/(auth)/actions"
 
 export const metadata: Metadata = {
   title: "Sign Up | Momentum",
   description: "Create a new account.",
 }
 
-export default function SignUpPage({
+export default async function SignUpPage({
   searchParams,
 }: {
-  searchParams: { message: string }
+  searchParams: Promise<{ message?: string }>
 }) {
+  const resolvedSearchParams = await searchParams;
+
   return (
     <div className="space-y-6">
       <div>
@@ -25,9 +27,9 @@ export default function SignUpPage({
       </div>
 
       <form className="space-y-4">
-        {searchParams?.message && (
+        {resolvedSearchParams?.message && (
           <div className="p-3 text-sm text-red-500 bg-red-50 dark:bg-red-950/50 rounded-md">
-            {searchParams.message}
+            {resolvedSearchParams.message}
           </div>
         )}
         <div className="space-y-2">
@@ -38,7 +40,7 @@ export default function SignUpPage({
           <Label htmlFor="password">Password</Label>
           <Input id="password" name="password" type="password" required />
         </div>
-        <Button className="w-full" formAction={signup}>
+        <Button type="submit" className="w-full" formAction={signup}>
           Create Account
         </Button>
       </form>

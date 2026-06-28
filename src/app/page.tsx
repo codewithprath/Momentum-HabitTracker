@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 export default function LandingPage() {
   return (
@@ -16,9 +17,9 @@ export default function LandingPage() {
           <Link href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Log in
           </Link>
-          <Button asChild size="sm">
-            <Link href="/signup">Get Started</Link>
-          </Button>
+          <Link href="/signup" className={buttonVariants({ size: "sm" })}>
+            Get Started
+          </Link>
         </nav>
       </header>
 
@@ -32,11 +33,9 @@ export default function LandingPage() {
             A premium, distraction-free space to define your goals, track daily actions, and visualize your compounding progress over time.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Button asChild size="lg" className="h-12 px-8 text-base">
-              <Link href="/signup">
-                Start Tracking for Free <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <Link href="/signup" className={cn(buttonVariants({ size: "lg" }), "h-12 px-8 text-base")}>
+              Start Tracking for Free <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </div>
         </div>
 

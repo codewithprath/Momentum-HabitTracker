@@ -3,18 +3,20 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { login } from "../actions"
+import { login } from "@/app/(auth)/actions"
 
 export const metadata: Metadata = {
   title: "Login | Momentum",
   description: "Login to your account.",
 }
 
-export default function LoginPage({
+export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: { message: string }
+  searchParams: Promise<{ message?: string }>
 }) {
+  const resolvedSearchParams = await searchParams;
+
   return (
     <div className="space-y-6">
       <div>
@@ -25,9 +27,9 @@ export default function LoginPage({
       </div>
 
       <form className="space-y-4">
-        {searchParams?.message && (
+        {resolvedSearchParams?.message && (
           <div className="p-3 text-sm text-red-500 bg-red-50 dark:bg-red-950/50 rounded-md">
-            {searchParams.message}
+            {resolvedSearchParams.message}
           </div>
         )}
         <div className="space-y-2">
@@ -40,7 +42,7 @@ export default function LoginPage({
           </div>
           <Input id="password" name="password" type="password" required />
         </div>
-        <Button className="w-full" formAction={login}>
+        <Button type="submit" className="w-full" formAction={login}>
           Sign In
         </Button>
       </form>
