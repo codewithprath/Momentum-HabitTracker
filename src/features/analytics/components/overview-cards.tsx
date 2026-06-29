@@ -16,12 +16,12 @@ export function OverviewCards({ data }: { data: GlobalAnalytics }) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {cards.map((c, i) => (
-        <Card key={i}>
-          <CardHeader className="p-4 pb-2">
-            <CardTitle className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{c.label}</CardTitle>
+        <Card key={i} className="transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-primary/20">
+          <CardHeader className="p-5 pb-2">
+            <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{c.label}</CardTitle>
           </CardHeader>
-          <CardContent className="p-4 pt-0">
-            <div className="text-2xl font-bold">{c.value}</div>
+          <CardContent className="p-5 pt-0">
+            <div className="text-3xl font-bold tracking-tight">{c.value}</div>
           </CardContent>
         </Card>
       ))}

@@ -85,15 +85,15 @@ export function HabitCard({ habit, isCompletedToday, dateStr }: HabitCardProps) 
 
   return (
     <>
-      <Card className="group transition-all hover:shadow-md relative overflow-hidden">
+      <Card className="group transition-all duration-300 hover:shadow-md hover:border-primary/30 relative overflow-hidden">
         <CardContent className="p-4 flex items-center gap-4">
           <button
             onClick={handleToggle}
             className={cn(
-              "flex-shrink-0 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors",
+              "flex-shrink-0 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-300 active:scale-90",
               optimisticCompleted
-                ? "bg-primary border-primary text-primary-foreground"
-                : "border-muted-foreground/30 hover:border-primary/50 text-transparent"
+                ? "bg-primary border-primary text-primary-foreground shadow-sm"
+                : "border-muted-foreground/30 hover:border-primary/50 hover:bg-primary/5 text-transparent"
             )}
             aria-label={optimisticCompleted ? "Mark incomplete" : "Mark complete"}
           >
@@ -102,8 +102,8 @@ export function HabitCard({ habit, isCompletedToday, dateStr }: HabitCardProps) 
 
           <div className="flex-1 min-w-0">
             <h3 className={cn(
-              "font-medium truncate transition-all duration-300",
-              optimisticCompleted && "text-muted-foreground line-through"
+              "font-semibold tracking-tight text-base truncate transition-all duration-300",
+              optimisticCompleted && "text-muted-foreground line-through opacity-70"
             )}>
               {habit.name}
             </h3>

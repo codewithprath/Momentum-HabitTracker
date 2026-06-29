@@ -11,17 +11,17 @@ export function DailyProgress({ completed, total }: DailyProgressProps) {
   const percentage = total === 0 ? 0 : Math.round((completed / total) * 100);
 
   return (
-    <div className="p-6 rounded-xl border bg-card">
-      <div className="flex justify-between items-end mb-4">
+    <div className="p-6 rounded-xl border border-border/50 bg-card shadow-sm transition-all hover:shadow-md">
+      <div className="flex justify-between items-end mb-5">
         <div>
-          <h3 className="font-semibold text-lg">Daily Progress</h3>
+          <h3 className="font-semibold tracking-tight text-lg">Daily Progress</h3>
           <p className="text-sm text-muted-foreground mt-1">
-            {completed} of {total} habits completed
+            <span className="font-medium text-foreground">{completed}</span> of {total} habits completed
           </p>
         </div>
-        <span className="text-3xl font-bold text-primary">{percentage}%</span>
+        <span className="text-4xl font-bold tracking-tighter text-primary">{percentage}%</span>
       </div>
-      <Progress value={percentage} className="h-3" />
+      <Progress value={percentage} className="h-2.5 bg-primary/10" />
     </div>
   );
 }

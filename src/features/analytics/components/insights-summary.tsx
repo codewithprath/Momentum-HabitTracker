@@ -8,27 +8,27 @@ export function InsightsSummaryCard({ data }: { data: InsightsSummary }) {
       <CardContent className="p-6">
         <h2 className="text-xl font-bold tracking-tight mb-4">Insights</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="flex items-start gap-3">
-            <div className="p-2 bg-primary/20 text-primary rounded-lg">
+          <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-background/50 transition-colors">
+            <div className="p-2.5 bg-primary/10 text-primary rounded-lg shadow-inner">
               <Flame className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-sm font-medium">Momentum</p>
-              <p className="text-sm text-muted-foreground mt-1">
-                You are on a <strong className="text-foreground">{data.currentGlobalStreak} day</strong> global streak.
+              <p className="text-sm font-semibold tracking-tight">Momentum</p>
+              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                🔥 You&apos;re currently on a <strong className="text-foreground">{data.currentGlobalStreak}-day</strong> streak.
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3">
-            <div className="p-2 bg-primary/20 text-primary rounded-lg">
+          <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-background/50 transition-colors">
+            <div className="p-2.5 bg-primary/10 text-primary rounded-lg shadow-inner">
               <Target className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-sm font-medium">Best Habit</p>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-sm font-semibold tracking-tight">Best Habit</p>
+              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
                 {data.bestHabit ? (
-                  <>Your most consistent habit is <strong className="text-foreground">{data.bestHabit}</strong>.</>
+                  <>📚 <strong className="text-foreground">{data.bestHabit}</strong> is your strongest habit.</>
                 ) : (
                   "Not enough data yet."
                 )}
@@ -36,8 +36,8 @@ export function InsightsSummaryCard({ data }: { data: InsightsSummary }) {
             </div>
           </div>
 
-          <div className="flex items-start gap-3">
-            <div className="p-2 bg-primary/20 text-primary rounded-lg">
+          <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-background/50 transition-colors">
+            <div className="p-2.5 bg-primary/10 text-primary rounded-lg shadow-inner">
               {data.weeklyTrend === "improving" ? (
                 <TrendingUp className="w-5 h-5 text-emerald-500" />
               ) : data.weeklyTrend === "declining" ? (
@@ -47,10 +47,10 @@ export function InsightsSummaryCard({ data }: { data: InsightsSummary }) {
               )}
             </div>
             <div>
-              <p className="text-sm font-medium">Weekly Trend</p>
-              <p className="text-sm text-muted-foreground mt-1">
-                Your consistency is {data.weeklyTrend} 
-                {data.weeklyTrend !== "stable" && <strong> ({data.weeklyDifference > 0 ? "+" : ""}{data.weeklyDifference}%)</strong>}.
+              <p className="text-sm font-semibold tracking-tight">Weekly Trend</p>
+              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                {data.weeklyTrend === "improving" ? "📈" : data.weeklyTrend === "declining" ? "📉" : "📊"} Your weekly consistency {data.weeklyTrend === "improving" ? "improved" : data.weeklyTrend === "declining" ? "declined" : "remained stable"}
+                {data.weeklyTrend !== "stable" && <> by <strong className="text-foreground">{data.weeklyDifference}%</strong></>}.
               </p>
             </div>
           </div>

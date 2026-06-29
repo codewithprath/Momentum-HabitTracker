@@ -19,9 +19,9 @@ export function HabitAnalyticsList({ data }: { data: HabitAnalytics[] }) {
 
   return (
     <Card>
-      <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-2 gap-4">
-        <CardTitle>Habit Consistency</CardTitle>
-        <div className="flex flex-wrap gap-2">
+      <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 p-6">
+        <CardTitle className="text-lg font-bold tracking-tight">Habit Consistency</CardTitle>
+        <div className="flex flex-wrap gap-1.5 p-1 bg-muted/30 rounded-lg">
           <Button variant={sort === "consistency-high" ? "secondary" : "ghost"} size="sm" onClick={() => setSort("consistency-high")}>
             Highest
           </Button>
@@ -53,19 +53,23 @@ export function HabitAnalyticsList({ data }: { data: HabitAnalytics[] }) {
               </TableHeader>
               <TableBody>
                 {sortedData.map((h) => (
-                  <TableRow key={h.habit.id}>
-                    <TableCell className="font-medium">
+                  <TableRow key={h.habit.id} className="transition-colors hover:bg-muted/50 group">
+                    <TableCell className="font-semibold">
                       {h.habit.name}
                       <div className="text-xs text-muted-foreground md:hidden">{h.missedDays} missed</div>
                     </TableCell>
                     <TableCell className="text-right">
-                      <span className={h.completionRate > 75 ? "text-emerald-500 font-semibold" : h.completionRate < 30 ? "text-destructive font-semibold" : ""}>
-                        {h.completionRate}%
-                      </span>
+                      <div className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-background border shadow-sm">
+                        <span className={h.completionRate > 75 ? "text-emerald-500" : h.completionRate < 30 ? "text-destructive" : "text-muted-foreground"}>
+                          {h.completionRate}%
+                        </span>
+                      </div>
                     </TableCell>
-                    <TableCell className="text-right">{h.currentStreak} <span className="text-xs text-muted-foreground">({h.longestStreak} max)</span></TableCell>
-                    <TableCell className="text-right">{h.totalCompletions}</TableCell>
-                    <TableCell className="text-right hidden md:table-cell">{h.missedDays}</TableCell>
+                    <TableCell className="text-right font-medium">
+                      {h.currentStreak} <span className="text-xs text-muted-foreground font-normal ml-1">({h.longestStreak} max)</span>
+                    </TableCell>
+                    <TableCell className="text-right text-muted-foreground">{h.totalCompletions}</TableCell>
+                    <TableCell className="text-right hidden md:table-cell text-muted-foreground">{h.missedDays}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

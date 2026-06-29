@@ -38,11 +38,11 @@ export function ArchivedHabitCard({ habit }: { habit: Habit }) {
   }
 
   return (
-    <Card className="opacity-75">
-      <CardContent className="flex items-center justify-between p-4">
+    <Card className="opacity-75 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 hover:shadow-md">
+      <CardContent className="flex items-center justify-between p-5">
         <div>
-          <h3 className="font-semibold">{habit.name}</h3>
-          <p className="text-sm text-muted-foreground">{habit.category} • {habit.frequency}</p>
+          <h3 className="font-semibold tracking-tight">{habit.name}</h3>
+          <p className="text-xs text-muted-foreground mt-1 capitalize font-medium">{habit.category} • {habit.frequency}</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" onClick={onRestore} disabled={isPending}>

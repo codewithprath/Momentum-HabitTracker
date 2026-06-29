@@ -21,8 +21,10 @@ export function MainNav() {
           key={link.href}
           href={link.href}
           className={cn(
-            "transition-colors hover:text-foreground/80",
-            pathname === link.href ? "text-foreground" : "text-foreground/60"
+            "transition-all px-4 py-2 rounded-full",
+            pathname === link.href 
+              ? "bg-secondary text-foreground font-semibold shadow-sm" 
+              : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
           )}
         >
           {link.label}
