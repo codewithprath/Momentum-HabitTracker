@@ -11,6 +11,20 @@ async function getUserId() {
   if (error || !user) {
     throw new Error("Unauthorized");
   }
+
+  // Ensure user exists in our public.users table to satisfy foreign key constraints
+  const dbUser = await prisma.user.findUnique({ where: { id: user.id } });
+  if (!dbUser) {
+    await prisma.user.create({
+      data: {
+        id: user.id,
+        email: user.email || "",
+        firstName: user.user_metadata?.first_name || null,
+        lastName: user.user_metadata?.last_name || null,
+      }
+    });
+  }
+
   return user.id;
 }
 

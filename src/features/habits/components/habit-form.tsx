@@ -46,8 +46,12 @@ export function HabitForm({ onSuccess, initialData }: HabitFormProps) {
     });
   }
 
+  function onError(errors: any) {
+    console.error("Validation failed:", errors);
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-4">
       <div className="space-y-2">
         <Label htmlFor="name">Habit Name</Label>
         <Input id="name" placeholder="Read 10 pages" {...register("name")} />
@@ -60,14 +64,14 @@ export function HabitForm({ onSuccess, initialData }: HabitFormProps) {
         {errors.description && <p className="text-sm text-destructive">{errors.description.message}</p>}
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
           <Label>Category</Label>
           <Controller
             control={control}
             name="category"
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
@@ -84,12 +88,33 @@ export function HabitForm({ onSuccess, initialData }: HabitFormProps) {
         </div>
 
         <div className="space-y-2">
+          <Label>Frequency</Label>
+          <Controller
+            control={control}
+            name="frequency"
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select frequency" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="daily">Daily</SelectItem>
+                  <SelectItem value="weekly">Weekly</SelectItem>
+                  <SelectItem value="monthly">Monthly</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {errors.frequency && <p className="text-sm text-destructive">{errors.frequency.message}</p>}
+        </div>
+
+        <div className="space-y-2">
           <Label>Difficulty</Label>
           <Controller
             control={control}
             name="difficulty"
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select difficulty" />
                 </SelectTrigger>
