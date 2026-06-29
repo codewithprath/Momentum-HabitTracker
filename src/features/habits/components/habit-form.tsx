@@ -46,7 +46,7 @@ export function HabitForm({ onSuccess, initialData }: HabitFormProps) {
     });
   }
 
-  function onError(errors: any) {
+  function onError(errors: unknown) {
     console.error("Validation failed:", errors);
   }
 

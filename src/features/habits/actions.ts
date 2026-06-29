@@ -92,6 +92,29 @@ export async function archiveHabit(id: string) {
   }
 }
 
+export async function restoreHabit(id: string) {
+  try {
+    const userId = await getUserId();
+    
+    // Verify ownership
+    const existing = await prisma.habit.findUnique({ where: { id } });
+    if (!existing || existing.userId !== userId) {
+      throw new Error("Habit not found or unauthorized");
+    }
+
+    await prisma.habit.update({
+      where: { id },
+      data: { isArchived: false },
+    });
+
+    revalidatePath("/app");
+    return { success: true };
+  } catch (error: unknown) {
+    return { success: false, error: error instanceof Error ? error.message : "Failed to restore habit" };
+  }
+}
+
+
 export async function deleteHabit(id: string) {
   try {
     const userId = await getUserId();
