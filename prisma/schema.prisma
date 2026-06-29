@@ -4,8 +4,6 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -33,6 +31,9 @@ model Habit {
   description String?
   iconName    String?
   colorHex    String?
+  category    String     @default("General")
+  frequency   String     @default("daily")
+  difficulty  String     @default("medium")
   isArchived  Boolean    @default(false)
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
